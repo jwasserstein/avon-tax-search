@@ -25,20 +25,26 @@ def grab_address(html):
 
 
 if __name__ == '__main__':
-    os.chdir('html/A/')
-    ls = os.listdir()
     addresses = ['Address']  # initialize storage variable with header
     values = ['Value']  # initialize storage variable with header
     file_names = ['File Names']
-    for i in ls:
-        if i == '.DS_Store':
-            continue
-        with open(i, 'r') as f:
-            file_data = f.read()
-            if 'Resident' in file_data:
-                addresses.append(grab_address(file_data))
-                values.append(grab_assessed_value(file_data))
-                file_names.append(i)
+
+    for j in range(65, 91):
+        print('processing all {}s'.format(chr(j)))
+        os.chdir('html/{}'.format(chr(j)))
+        ls = os.listdir()
+        for i in ls:
+            if i == '.DS_Store':
+                continue
+            with open(i, 'r') as f:
+                file_data = f.read()
+                if 'Resident' in file_data:
+                    addresses.append(grab_address(file_data))
+                    values.append(grab_assessed_value(file_data))
+                    file_names.append(i)
+        os.chdir('..')
+        os.chdir('..')
+
     with open('output.csv', 'w') as f:
         for i in range(0, len(addresses)-1):
             f.write(str(addresses[i]) + ', $' + str(values[i]) + ', ' + str(file_names[i]) + '\n')
