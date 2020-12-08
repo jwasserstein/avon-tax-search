@@ -40,7 +40,6 @@ if __name__ == '__main__':
     addresses = ['Address']  # initialize storage variable with header
     values = ['Value']  # initialize storage variable with header
     file_names = ['File Names']
-    owners = ['Owners']
 
     for j in range(65, 91):
         print('processing all {}s'.format(chr(j)))
